@@ -51,7 +51,6 @@ expand_content_files =		\
 extra_files =			\
 	$(NULL)
 
-include $(top_srcdir)/gtk-doc.make
 
 EXTRA_DIST +=			\
 	$(NULL)

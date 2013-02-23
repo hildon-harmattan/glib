@@ -81,7 +81,6 @@ expand_content_files = 			\
 FIXXREF_OPTIONS=--extra-dir=$(srcdir)/../gobject/html --extra-dir=$(srcdir)/../gio/html
 
 # include common portion ...
-include $(top_srcdir)/gtk-doc.make
 
 # Other files to distribute
 EXTRA_DIST +=				\
@@ -99,15 +98,6 @@ man_MANS =		  	\
 	gtester.1		\
 	gtester-report.1
 
-if ENABLE_MAN
-
-.xml.1:
-	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-dist-local-check-mans-enabled:
-	if grep "Man generation disabled" $(man_MANS) >/dev/null; then $(RM) $(man_MANS); fi
-
-else
 
 $(man_MANS):
 	echo Man generation disabled.  Creating dummy $@.  Configure with --enable-man to enable it.
@@ -117,7 +107,6 @@ dist-local-check-mans-enabled:
 	echo "*** --enable-man must be used in order to make dist"
 	false
 
-endif
 
 MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 

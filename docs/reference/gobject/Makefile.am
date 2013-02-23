@@ -59,7 +59,6 @@ content_files = version.xml 		\
 # Extra options to supply to gtkdoc-fixref
 FIXXREF_OPTIONS=--extra-dir=$(srcdir)/../glib/html
 
-include $(top_srcdir)/gtk-doc.make
 
 # Other files to distribute
 EXTRA_DIST += 		\
@@ -73,15 +72,6 @@ man_MANS = 			\
 	glib-genmarshal.1 	\
 	gobject-query.1
 
-if ENABLE_MAN
-
-.xml.1:
-	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-dist-local-check-mans-enabled:
-	if grep "Man generation disabled" $(man_MANS) >/dev/null; then $(RM) $(man_MANS); fi
-
-else
 
 $(man_MANS):
 	echo Man generation disabled.  Creating dummy $@.  Configure with --enable-man to enable it.
@@ -91,7 +81,6 @@ dist-local-check-mans-enabled:
 	echo "*** --enable-man must be used in order to make dist"
 	false
 
-endif
 
 MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 
